@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilities Base</title>
+
+    <!--CSS 파일 불러오는 주소 static 적고 '경로' 표시 -->
+    <link rel="stylesheet" href="{% static 'utilities/stylesheets/base.css' %}" type="text/css">
+
+</head>
+<body>
+    <header>
+        <h1>Django Intro</h1>
+    </header>
+
+    <section>  <!--index.html 부분이라고 생각하면 된다. -->
+        {% block body %}
+        {% endblock %}
+    </section>
+
+    <footer>
+        <p>Copyright @ 2019</p>
+    </footer>
+</body>
+</html>

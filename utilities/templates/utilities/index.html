@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+<!--(기존) 'utilities/base.html' Utilities - templates 안에서 파일을 찾는다. +'경로('utilities/base.html')' -->
+{% load static %}
+
+{% block body %}
+    <h2>(상속상속! )Welcome to Utilities Page ;)</h2>
+    <img src="{% static 'utilities/images/webimage.jpg' %}" alt="심슨 코리아 방문">
+{% endblock %}

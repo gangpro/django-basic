@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>static_example</title>
+
+    <!--CSS 파일 불러오는 주소 static 적고 '경로' 표시 -->
+    <link rel="stylesheet" href="{% static 'stylesheets/style.css' %}" type="text/css">
+
+</head>
+<body>
+
+    <h1>Static Example</h1>
+    <img src="{% static 'images/webimage.jpg' %}" alt="심슨 한국 방문">
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template_language</title>
+</head>
+<body>
+
+    <!--    디장고 시작하기  https://docs.djangoproject.com/ko/2.2/intro/ -->
+    <!--    https://docs.djangoproject.com/ko/2.2/ref/templates/builtins/  -->
+
+    <!-- for문 시작 선언-->
+    <h2>1. 반복문</h2>
+    {% for menu in menus %}
+        <p>{{ menu }}</p>
+    {% endfor %}  <!--여기서 for문 종료 선언-->
+    <hr />
+
+    {% for menu in menus %}
+        <p>{{ forloop.counter }} {{ menu }}</p>
+    {% endfor %}
+    <hr />
+
+    {% for user in empty_list %}
+        <p>{{ user }}</p>   <!-- user가 없다면 empty 실행-->
+    {% empty %}
+        <!--empty : for 태그 안에 optional하게 있음, 빈 리스트 일때 출력 됨.-->
+        <p>현재 가입한 유저가 없습니다.</p>
+    {% endfor %}
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>2. 조건문</h2>
+    {% if '짜장면' in menus %}
+        <p>짜장면에는 고춧가루지! </p>
+    {% endif %}
+    <hr />
+
+    {% for menu in menus %}
+        {{ forloop.counter }} 번째 도는 중
+        {% if forloop.first %}
+            <p>짜장면 + 고춧가루</p>
+        {% else %}
+            <p>{{ menu }}</p>
+        {% endif %}
+    {% endfor %}
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>3. length filter 활용</h2>
+    {% for message in messages %}
+        {% if message|length > 5 %}
+            <p>글씨가 너무 길어요!</p>
+        {% else %}
+            <p>{{ message }}, {{ message|length }}</p>
+        {% endif %}
+    {% endfor %}
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>4. lorem ipsum</h2>  <!--lorem ipsum : 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트-->
+    {% lorem %}
+    <hr />
+    {% lorem 3 w %}  <!--3 w  : 세 단어-->
+    <hr />
+    {% lorem 4 w random %}  <!--4 w random : 랜덤으로 네 단어-->
+    <hr />
+    {% lorem 2 p %}  <!--2 p  : 두 문장-->
+
+    <h2>5. 글자수 제한(truncte)</h2>
+    <p>{{ my_sentence|truncatewords:3 }}</p> 단어 단위로 제한
+    <p>{{ my_sentence|truncatechars:4 }}</p> 문자 단위로 제한
+    <p>{{ my_sentence|truncatechars:10 }}</p> 문자 단위로 제한
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>6. 글자 관련 필터</h2>
+    <p>{{ 'abc'|length }}</p>   <!--글자수-->
+    <p>{{ 'ABC'|lower }}</p>    <!--소문자로 변환-->
+    <p>{{ 'abc'|upper }}</p>    <!--대문자로 변환-->
+    <p>{{ my_sentence|title }}</p>      <!--모든 단어의 첫번째 대문자로 변환-->
+    <p>{{ menus|random }}</p>       <!--menus에서 랜덤으로 한개 추출-->
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>7. 연산</h2>         <!--참고 : https://pypi.org/project/django-mathfilters/-->
+    <p>{{ 4|add:6 }}</p>    <!-- 4+6 -->
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>8. 날짜 표현</h2>
+    <p>{{ datetimenow }}</p>                    <!--2019년 6월 4일 11:23 오전-->
+    <!--now는 뒤에 옵션을 꼭 써야함-->
+    <p>{% now "DATETIME_FORMAT" %}</p>          <!--2019년 6월 4일 11:23 오전-->
+    <p>{% now "SHORT_DATETIME_FORMAT" %}</p>    <!--2019-6-4 11:23-->
+    <p>{% now "DATE_FORMAT" %}</p>              <!--2019년 6월 4일-->
+    <p>{% now "SHORT_DATE_FORMAT" %}</p>        <!--2019-6-4.-->
+    <hr />
+    {% now "Y년 m월 d일 (D) h:i" %}               <!--2019년 06월 04일 (화요일) 11:25-->
+    <hr />
+    {% now "Y" as current_year %}
+    <p> Copyright @ {{ current_year }}</p>      <!--Copyright @ 2019-->
+    {{ datetimenow|date:"SHORT_DATE_FORMAT" }}
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>9. URL 표현</h2>
+    <p>{{ 'google.com'|urlize }}</p>
+    <p><a href="https://google.com">Google</a></p>
+    <hr />
+    <br />
+    <br />
+
+
+
+    <h2>문제. 오늘 날짜가 생일인지 아닌지 체크</h2>
+    {% now "m" as current_month %}
+    {% now "d" as current_day %}
+    <p>{{ current_month }}월 {{ current_day }}일</p>
+    {% if current_month == '02' and current_day == '31' %}
+        <p>YES</p>
+    {% else %}
+        <p>NO</p>
+    {% endif %}
+
+
+    <hr />
+    <br />
+    <br />
+
+
+
+
+</body>
+</html>
